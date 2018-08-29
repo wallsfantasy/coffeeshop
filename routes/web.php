@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Routing\Router as Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,3 +16,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/drinks', 'DrinksController@listDrinks');
