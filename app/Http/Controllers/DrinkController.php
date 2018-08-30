@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Drink;
+use App\Http\Requests\AddDrinkRequest;
+use App\Repository\DrinkRepository;
+use Illuminate\Support\Facades\URL;
 
 class DrinkController extends Controller
 {
@@ -11,5 +14,17 @@ class DrinkController extends Controller
         $drinks = Drink::all();
 
         return view('drinks.list', ['drinks' => $drinks]);
+    }
+
+    public function postAddDrink(AddDrinkRequest $request, DrinkRepository $repository)
+    {
+        $drink = new Drink([
+            'name' => $request->request->get('name'),
+            'price' => $request->request->get('price'),
+        ]);
+
+        $repository->add($drink);
+
+        return redirect(URL::route('drink.list'));
     }
 }
