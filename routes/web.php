@@ -17,4 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/drinks', 'DrinksController@listDrinks');
+Route::get('/drinks', 'DrinksController@listDrinks')
+    ->name('drinks.list');
