@@ -32,4 +32,17 @@ class DrinkRepoitoryTest extends TestCase
 
         $this->assertTrue($result);
     }
+
+    public function testDelete()
+    {
+        $drink = new Drink();
+        $drink->name = 'Green Tea';
+        $drink->price = '20.20';
+
+        $this->repository->add($drink);
+
+        $result = $this->repository->remove($drink->id);
+
+        $this->assertTrue($result);
+    }
 }
