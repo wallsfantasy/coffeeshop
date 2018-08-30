@@ -25,3 +25,6 @@ Route::post('/drinks/add', 'DrinkController@postAddDrink')
 
 Route::get('drinks/add', 'DrinkController@showAddDrink')
     ->name('drink.add.show');
+
+Route::post('drinks/remove', 'DrinkController@postRemoveDrink')
+    ->name('drink.remove');

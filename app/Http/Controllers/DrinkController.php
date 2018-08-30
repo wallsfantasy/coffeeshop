@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entities\Drink;
 use App\Http\Requests\AddDrinkRequest;
+use App\Http\Requests\RemoveDrinkRequest;
 use App\Repository\DrinkRepository;
 use Illuminate\Support\Facades\URL;
 
@@ -29,6 +30,13 @@ class DrinkController extends Controller
         ]);
 
         $repository->add($drink);
+
+        return redirect(URL::route('drink.list'));
+    }
+
+    public function postRemoveDrink(RemoveDrinkRequest $request, DrinkRepository $repository)
+    {
+        $repository->remove($request->request->get('id'));
 
         return redirect(URL::route('drink.list'));
     }

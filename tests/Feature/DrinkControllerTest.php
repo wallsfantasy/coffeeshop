@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Entities\Drink;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
@@ -18,8 +19,8 @@ class DrinkControllerTest extends TestCase
 
         $response = $this->get($uri);
 
-        $response->assertStatus(200);
         $response->assertSeeText('Menu');
+        $response->assertStatus(200);
     }
 
     public function testAddDrink()
@@ -57,5 +58,29 @@ class DrinkControllerTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors(['price']);
+    }
+
+    public function testRemoveDrink()
+    {
+        $drink = new Drink(['name' => 'test', 'price' => '20']);
+        $drink->save();
+
+        $uri = URL::route('drink.remove');
+
+        $response = $this->post($uri, ['id' => $drink->id]);
+
+        $response->assertRedirect(URL::route('drink.list'));
+    }
+
+    public function testRemoveDrinkEmptyIdFailed()
+    {
+        $drink = new Drink(['name' => 'test', 'price' => '20']);
+        $drink->save();
+
+        $uri = URL::route('drink.remove');
+
+        $response = $this->post($uri, ['id' => '']);
+
+        $response->assertSessionHasErrors(['id']);
     }
 }

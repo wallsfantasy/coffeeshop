@@ -25,6 +25,13 @@
                 <td>{{ $drink->id }}</td>
                 <td>{{ $drink->name }}</td>
                 <td>{{ $drink->price }}</td>
+                <td>
+                    <form action="{{ route('drink.remove') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $drink->id }}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
         @endforeach
     </table>
