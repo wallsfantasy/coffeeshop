@@ -16,6 +16,11 @@ class DrinkController extends Controller
         return view('drinks.list', ['drinks' => $drinks]);
     }
 
+    public function showAddDrink()
+    {
+        return view('drinks.add');
+    }
+
     public function postAddDrink(AddDrinkRequest $request, DrinkRepository $repository)
     {
         $drink = new Drink([

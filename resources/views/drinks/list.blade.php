@@ -2,8 +2,15 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
+        <div class="col-lg-8 margin-tb">
             <h2>Menu</h2>
+        </div>
+        <div class="col-lg-4">
+            <div class="row">
+                <div class="pull-right">
+                    <a class="btn btn-success" href="{{ route('drink.add.show') }}">Add Drink!</a>
+                </div>
+            </div>
         </div>
     </div>
 

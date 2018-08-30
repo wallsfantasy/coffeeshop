@@ -20,5 +20,8 @@ Route::get('/', function () {
 Route::get('/drinks', 'DrinkController@listDrinks')
     ->name('drink.list');
 
-Route::post('/drinks', 'DrinkController@postAddDrink')
+Route::post('/drinks/add', 'DrinkController@postAddDrink')
     ->name('drink.add');
+
+Route::get('drinks/add', 'DrinkController@showAddDrink')
+    ->name('drink.add.show');
