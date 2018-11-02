@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -11,6 +12,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class DrinkControllerTest extends TestCase
 {
     use DatabaseTransactions;
+
+    public function setUp()
+    {
+        parent::setUp();
+        Session::start();
+    }
 
     public function testDrinkList()
     {
@@ -27,6 +34,7 @@ class DrinkControllerTest extends TestCase
         $uri = URL::route('drink.add');
 
         $response = $this->post($uri, [
+            '_token' => Session::token(),
             'name' => 'Mixed Juice',
             'price' => '20.00',
         ]);
@@ -40,6 +48,7 @@ class DrinkControllerTest extends TestCase
         $uri = URL::route('drink.add');
 
         $response = $this->post($uri, [
+            '_token' => Session::token(),
             'name' => '',
             'price' => '20.00',
         ]);
@@ -52,6 +61,7 @@ class DrinkControllerTest extends TestCase
         $uri = URL::route('drink.add');
 
         $response = $this->post($uri, [
+            '_token' => Session::token(),
             'name' => 'Chocolate',
             'price' => '',
         ]);
